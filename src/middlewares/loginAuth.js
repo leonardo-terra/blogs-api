@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+/* const jwt = require('jsonwebtoken');
 const { User } = require('../database/models');
 const { generateToken } = require('../utils/jwt');
 
@@ -8,4 +8,4 @@ const authenticate = async ({ email, password }) => {
   }
 
   const userInfo = await User.findOne({ where: { email } });
-};
+}; */
