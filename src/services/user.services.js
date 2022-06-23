@@ -8,4 +8,9 @@ const getByEmail = async (email) => {
   return userInfo.dataValues;
 };
 
-module.exports = { getUsers, getByEmail };
+const create = async ({ displayName, email, password, image }) => {
+  const newUser = await User.create({ displayName, email, password, image });
+  return newUser;
+};
+
+module.exports = { getUsers, getByEmail, create };
