@@ -11,4 +11,12 @@ const create = async (req, res) => {
   }
 };
 
-module.exports = { create };
+const getAll = async (req, res) => {
+  try {
+    return res.status(200).send(await categoryServices.getAll());
+  } catch (error) {
+    return res.status(400).send({ message: error.message });
+  }
+};
+
+module.exports = { create, getAll };
