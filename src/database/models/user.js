@@ -1,5 +1,5 @@
 const UserSchema = (sequelize, DataTypes) => {
-  const UserTable = sequelize.define("User", {
+  const User = sequelize.define("User", {
     id: {
       type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true
     },
@@ -9,12 +9,12 @@ const UserSchema = (sequelize, DataTypes) => {
     image: DataTypes.STRING(255),
   }, { timestamps: false });
 
-  /*   UserTable.associate = (models) => {
-      UserTable.hasMany(models.BlogPost,
-        { foreignKey: 'userId', as: 'user' });
-    }
-   */
-  return UserTable;
+  User.associate = (models) => {
+    User.hasMany(models.BlogPost,
+      { foreignKey: 'userId', as: 'blogPost' });
+  }
+
+  return User;
 }
 
 module.exports = UserSchema;
