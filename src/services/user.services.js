@@ -1,7 +1,12 @@
 const { User } = require('../database/models');
 const { generateToken } = require('../utils/jwt');
 
-const getUsers = () => User.findAll();
+const getUsers = async () => {
+  const usersInfo = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+  return usersInfo;
+};
 
 const getByEmail = async (email) => {
   const userInfo = await User.findOne({ where: { email } });

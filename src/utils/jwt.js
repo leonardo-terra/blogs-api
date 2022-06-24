@@ -13,7 +13,7 @@ const generateToken = ({ email }) => jwt.sign(
 
 const authenticateToken = async (token) => {
   if (!token) {
-    throw Error('Expired or invalid token');
+    throw Error('Token not found');
   }
   try {
     const validate = await jwt.verify(token, TOKEN_SECRET);
