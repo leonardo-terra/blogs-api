@@ -1,5 +1,6 @@
 const User = require('../services/user.services');
 const middlewares = require('../middlewares');
+const { userValidationJoi } = require('../utils/userValidationJoi');
 
 const getUsers = async (_req, res) => {
   try {
@@ -34,7 +35,7 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
   try {
     const isUnique = await middlewares.isUnique(req.body.email);
-    const isValid = await middlewares.userValidation.validateAsync(req.body);
+    const isValid = await userValidationJoi.validateAsync(req.body);
 
     if (!isUnique) return res.status(409).send({ message: 'User already registered' });
     const token = await User.create(isValid);

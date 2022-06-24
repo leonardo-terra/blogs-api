@@ -1,8 +1,9 @@
 require('dotenv').config();
 const express = require('express');
 const app = require('./api');
-const User = require('./controllers/user.controllers');
+const userController = require('./controllers/user.controllers');
 const Auth = require('./controllers/auth.controllers');
+const categoryController = require('./controllers/category.controller');
 const middlewares = require('./middlewares');
 
 // não remova a variável `API_PORT` ou o `listen`
@@ -14,10 +15,11 @@ app.get('/', (_request, response) => {
   response.send();
 });
 
-app.get('/user', middlewares.authentication, User.getUsers);
-app.get('/user/:id', middlewares.authentication, User.getById);
+app.get('/user', middlewares.authentication, userController.getUsers);
+app.get('/user/:id', middlewares.authentication, userController.getById);
 
 app.post('/login', Auth.login);
-app.post('/user', User.create);
+app.post('/user', userController.create);
+app.post('/categories', middlewares.authentication, categoryController.create);
 
 app.listen(port, () => console.log('ouvindo porta:', port));
