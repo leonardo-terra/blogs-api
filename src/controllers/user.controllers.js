@@ -23,12 +23,11 @@ const getByEmail = async (req, res) => {
 const create = async (req, res) => {
   try {
     const isUnique = await middlewares.isUnique(req.body.email);
-    if (!isUnique) return res.status(409).send({ message: 'User already registered' });
-
     const isValid = await middlewares.userValidation.validateAsync(req.body);
 
-    const newUser = await User.create(isValid);
-    return res.status(201).send(newUser.dataValues);
+    if (!isUnique) return res.status(409).send({ message: 'User already registered' });
+    const token = await User.create(isValid);
+    return res.status(201).send(token);
   } catch (error) {
     return res.status(400).send({ message: error.message });
   }

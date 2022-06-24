@@ -1,9 +1,9 @@
 const { isUnique } = require('./isUnique');
-/* const { loginAuth } = require('./loginAuth'); */
+const { authentication } = require('./authentication');
 const { userValidation } = require('./userValidation');
 
 module.exports = {
   isUnique,
-  /* loginAuth, */
+  authentication,
   userValidation,
 };

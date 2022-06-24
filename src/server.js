@@ -3,6 +3,7 @@ const express = require('express');
 const app = require('./api');
 const User = require('./controllers/user.controllers');
 const Auth = require('./controllers/auth.controllers');
+/* const middlewares = require('./middlewares'); */
 
 // não remova a variável `API_PORT` ou o `listen`
 const port = process.env.API_PORT || 3000;
