@@ -14,10 +14,17 @@ const getByEmail = async (email) => {
   return userInfo.dataValues;
 };
 
+const getById = async (id) => {
+  const userInfo = await User.findByPk(id, {
+    attributes: { exclude: ['password'] },
+  });
+  return userInfo;
+};
+
 const create = async ({ displayName, email, password, image }) => {
   await User.create({ displayName, email, password, image });
   const token = generateToken(email);
   return { token };
 };
 
-module.exports = { getUsers, getByEmail, create };
+module.exports = { getUsers, getByEmail, create, getById };

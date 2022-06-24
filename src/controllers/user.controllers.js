@@ -20,6 +20,17 @@ const getByEmail = async (req, res) => {
   }
 };
 
+const getById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userInfo = await User.getById(id);
+    if (!userInfo) return res.status(404).send({ message: 'User does not exist' });
+    return res.status(200).send(userInfo);
+  } catch (error) {
+    return res.status(500).send({ message: error.message });
+  }
+};
+
 const create = async (req, res) => {
   try {
     const isUnique = await middlewares.isUnique(req.body.email);
@@ -33,4 +44,4 @@ const create = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, getByEmail, create };
+module.exports = { getUsers, getByEmail, create, getById };
