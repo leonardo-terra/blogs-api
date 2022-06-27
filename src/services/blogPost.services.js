@@ -10,9 +10,10 @@ const getPosts = () => BlogPost.findAll(
   },
 );
 
-const create = async ({ title, content, categoryIds }) => {
-  
-  return { title, content, categoryIds };
+const create = async ({ title, content, categoryIds }, userId) => {
+  const newPost = BlogPost.create({ userId, title, content, categoryIds });
+
+  return newPost;
 };
 
 /* 

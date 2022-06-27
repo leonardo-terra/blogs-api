@@ -6,8 +6,8 @@ const getPosts = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const newPost = await blogPostService.create(req.body, req.headers);
-  
+  const { id } = res.locals.payload;
+  const newPost = await blogPostService.create(req.body, id);
   return res.status(200).send(newPost);
 };
 
