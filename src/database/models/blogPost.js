@@ -8,7 +8,6 @@ const blogPostSchema = (sequelize, DataTypes) => {
     userId: { type: DataTypes.STRING, foreignKey: true },
     published: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     updated: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    image: DataTypes.STRING(255),
   }, {
     timestamps: false,
     tableName: 'BlogPosts',
