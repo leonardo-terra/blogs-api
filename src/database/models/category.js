@@ -1,5 +1,5 @@
 const CategorySchema = (sequelize, DataTypes) => {
-  const CategoryTable = sequelize.define("Category", {
+  const Category = sequelize.define("Category", {
     id: {
       type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true
     },
@@ -12,7 +12,7 @@ const CategorySchema = (sequelize, DataTypes) => {
         { foreignKey: 'CategoryId', as: 'Category' });
     }
    */
-  return CategoryTable;
+  return Category;
 }
 
 module.exports = CategorySchema;
