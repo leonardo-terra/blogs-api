@@ -19,7 +19,7 @@ app.get('/', (_request, response) => {
 app.get('/user', middlewares.authentication, userController.getUsers);
 app.get('/user/:id', middlewares.authentication, userController.getById);
 app.get('/categories', middlewares.authentication, categoryController.getAll);
-app.get('/posts', middlewares.authentication, blogPostController.getPosts);
+app.get('/post', middlewares.authentication, blogPostController.getPosts);
 
 app.post('/login', Auth.login);
 app.post('/user', userController.create);
