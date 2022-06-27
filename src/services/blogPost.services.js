@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const { BlogPost, Category, User } = require('../database/models');
 
 const getPosts = () => BlogPost.findAll(
