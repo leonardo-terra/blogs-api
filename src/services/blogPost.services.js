@@ -1,4 +1,4 @@
-const { BlogPost, Category, User } = require('../database/models');
+const { BlogPost, Category, User, PostCategory } = require('../database/models');
 
 const getPosts = () => BlogPost.findAll(
   {
@@ -9,9 +9,16 @@ const getPosts = () => BlogPost.findAll(
   },
 );
 
-const create = async ({ title, content, categoryIds }, userId) => {
-  const newPost = BlogPost.create({ userId, title, content, categoryIds });
+const createArrayToBulkCreate = (postId, categories) => {
+  const arrayToBulkCreate = categories.map((categoryId) => ({ postId, categoryId }));
+  return arrayToBulkCreate;
+};
 
+const create = async ({ title, content, categoryIds }, userId) => {
+  const newPost = await BlogPost.create({ userId, title, content });
+  const arrayToBulkCreate = createArrayToBulkCreate(newPost.id, categoryIds);
+  console.log('>>>>>>>>>>', arrayToBulkCreate);
+  await PostCategory.bulkCreate(arrayToBulkCreate);
   return newPost;
 };
 
