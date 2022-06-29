@@ -20,7 +20,7 @@ describe(requirements[11].description, () => {
       { silent: process.env.DEBUG === "false" });
   });
 
-  it('Será validado que é possível cadastrar um blogpost com sucesso', async () => {
+  it.only('Será validado que é possível cadastrar um blogpost com sucesso', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
@@ -52,6 +52,7 @@ describe(requirements[11].description, () => {
       .expect('status', 201)
       .then(async (response) => {
         const { json } = response;
+        console.log(json);
         expect(json.id).toBe(3);
         expect(json.title).toBe('Fórmula 1');
         expect(json.content).toBe('O campeão do ano!');

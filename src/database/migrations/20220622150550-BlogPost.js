@@ -21,15 +21,18 @@ module.exports = {
           key: 'id',
         },
         onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         primaryKey: true,
       },
       published: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       },
       updated: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('now')
       },
 
     });

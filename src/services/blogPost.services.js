@@ -1,4 +1,4 @@
-const { BlogPost, Category, User, PostCategory } = require('../database/models');
+const { BlogPost, Category, User, PostCategory, sequelize } = require('../database/models');
 
 const getPosts = () => BlogPost.findAll(
   {
@@ -15,11 +15,19 @@ const createArrayToBulkCreate = (postId, categories) => {
 };
 
 const create = async ({ title, content, categoryIds }, userId) => {
-  const newPost = await BlogPost.create({ userId, title, content });
-  const arrayToBulkCreate = createArrayToBulkCreate(newPost.id, categoryIds);
-  console.log('>>>>>>>>>>', arrayToBulkCreate);
-  await PostCategory.bulkCreate(arrayToBulkCreate);
-  return newPost;
+  const transaction = await sequelize.transaction();
+  try {
+    console.log(userId);
+    const arrayToBulkCreate = createArrayToBulkCreate(userId, categoryIds);
+
+    const newPost = await BlogPost.create({ title, content, userId }, { transaction });
+    await PostCategory.bulkCreate(arrayToBulkCreate, { transaction });
+    await transaction.commit();
+    return newPost;
+  } catch (error) {
+    await transaction.rollback();
+    return console.log(error.message);
+  }
 };
 
 /* 

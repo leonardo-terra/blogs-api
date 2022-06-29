@@ -7,8 +7,8 @@ const jwtConfig = {
   algorithm: 'HS256',
 };
 
-const generateToken = ({ email }) => jwt.sign(
-  { email }, TOKEN_SECRET, jwtConfig,
+const generateToken = ({ id, email }) => jwt.sign(
+  { data: email, id }, TOKEN_SECRET, jwtConfig,
 );
 
 const authenticateToken = async (token) => {
