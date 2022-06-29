@@ -14,19 +14,28 @@ const createArrayToBulkCreate = (postId, categories) => {
   return arrayToBulkCreate;
 };
 
+const checkCategoryIds = async (categoryIds) => {
+  const categoriesList = await Category.findAll();
+  const isValid = categoryIds.every((id) => categoriesList.some((el) => id === el.dataValues.id));
+  return isValid;
+};
+
 const create = async ({ title, content, categoryIds }, userId) => {
   const transaction = await sequelize.transaction();
   try {
-    console.log(userId);
-    const arrayToBulkCreate = createArrayToBulkCreate(userId, categoryIds);
+    const isCategoryValid = await checkCategoryIds(categoryIds);
+    if (!isCategoryValid) throw new Error('"categoryIds" not found');
 
     const newPost = await BlogPost.create({ title, content, userId }, { transaction });
+
+    const arrayToBulkCreate = createArrayToBulkCreate(newPost.id, categoryIds);
     await PostCategory.bulkCreate(arrayToBulkCreate, { transaction });
+
     await transaction.commit();
     return newPost;
   } catch (error) {
     await transaction.rollback();
-    return console.log(error.message);
+    throw new Error(error.message);
   }
 };
 

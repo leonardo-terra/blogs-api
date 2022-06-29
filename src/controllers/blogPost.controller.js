@@ -11,8 +11,7 @@ const create = async (req, res) => {
     const { title, content, categoryIds } = req.body;
     const isValid = await postValidationJoi.validateAsync(req.body);
     if (!title || !content || !categoryIds) throw new Error('Some required fields are missing');
-    const { id } = res.locals;
-    console.log('reslocals pay', res.locals);
+    const { id } = res.locals.payload;
     const newPost = await blogPostService.create(isValid, id);
     return res.status(201).send(newPost);
   } catch (error) {

@@ -20,7 +20,7 @@ describe(requirements[11].description, () => {
       { silent: process.env.DEBUG === "false" });
   });
 
-  it.only('Será validado que é possível cadastrar um blogpost com sucesso', async () => {
+  it('Será validado que é possível cadastrar um blogpost com sucesso', async () => {
     let token;
     await frisby
       .post(`${url}/login`,
