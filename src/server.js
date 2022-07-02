@@ -27,4 +27,10 @@ app.post('/user', userController.create);
 app.post('/categories', middlewares.authentication, categoryController.create);
 app.post('/post', middlewares.authentication, blogPostController.create);
 
+app.delete(
+  '/post/:id',
+  middlewares.authentication,
+  blogPostController.deletePost,
+);
+
 app.listen(port, () => console.log('ouvindo porta:', port));

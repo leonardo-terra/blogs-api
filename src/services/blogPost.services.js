@@ -67,13 +67,10 @@ const getById = async (id) => {
   }
 };
 
-/* 
-app.get('/usersbooks/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await User.findOne({
-      where: { userId: id },
-      include: [{ model: Book, as: 'books', through: { attributes: [] } }],
-    }); */
+const deletePost = async (id) => {
+  await BlogPost.destroy({
+    where: { id },
+  });
+};
 
-module.exports = { getPosts, create, getById };
+module.exports = { getPosts, create, getById, deletePost };

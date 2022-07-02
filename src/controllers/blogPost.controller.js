@@ -32,4 +32,16 @@ const getById = async (req, res) => {
   }
 };
 
-module.exports = { getPosts, create, getById };
+const deletePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const postById = await blogPostService.deletePost(id);
+    console.log(postById);
+    if (postById === undefined) throw new Error('Post does not exist');
+    return res.status(204).end();
+  } catch (error) {
+    return res.status(404).send({ message: error.message });
+  }
+};
+
+module.exports = { getPosts, create, getById, deletePost };
