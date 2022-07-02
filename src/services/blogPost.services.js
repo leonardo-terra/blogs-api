@@ -67,10 +67,18 @@ const getById = async (id) => {
   }
 };
 
+const updatePost = async (id, { title, content }) => {
+  const updatedPost = await BlogPost.update(
+    { title, content },
+    { where: { id } },
+  );
+  return updatedPost;
+};
+
 const deletePost = async (id) => {
   await BlogPost.destroy({
     where: { id },
   });
 };
 
-module.exports = { getPosts, create, getById, deletePost };
+module.exports = { getPosts, create, getById, updatePost, deletePost };

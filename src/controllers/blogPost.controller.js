@@ -32,6 +32,20 @@ const getById = async (req, res) => {
   }
 };
 
+const updatePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const isIdValid = await blogPostService.getById(id);
+    console.log(isIdValid);
+    if (!isIdValid) throw new Error('Post does not exist');
+    await blogPostService.updatePost(id, req.body);
+    return res.status(200).send({ message: 'Post updated successfully' });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).send({ message: error.message });
+  }
+};
+
 const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
@@ -44,4 +58,4 @@ const deletePost = async (req, res) => {
   }
 };
 
-module.exports = { getPosts, create, getById, deletePost };
+module.exports = { getPosts, create, getById, updatePost, deletePost };

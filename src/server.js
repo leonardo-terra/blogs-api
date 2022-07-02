@@ -33,4 +33,6 @@ app.delete(
   blogPostController.deletePost,
 );
 
+app.put('/post/:id', middlewares.authentication, blogPostController.updatePost);
+
 app.listen(port, () => console.log('ouvindo porta:', port));
