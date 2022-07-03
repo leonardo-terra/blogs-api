@@ -3,7 +3,9 @@
 
 <h2>Índice</h2>
 
-[Sobre](#sobre)<br />[Tecnologias](#tecnologias)<br />
+[Sobre](#sobre)<br />
+[Instaçação](#instalacao)<br />
+[Tecnologias](#tecnologias)<br />
 [Justificativa das tecnologias](#justificativas)<br />[Orientações](#orientacoes)<br />[Usabilidade](#usabilidade)<br />
 [Documentação](#documentacao)<br />
 
@@ -20,6 +22,14 @@ As autenticações e autorizações foram criadas utilizando o pacote JWT.
 Para maiores detalhes, consultar a seção [documentação](#documentacao)
 
 
+<h2 id="instalacao"> Instalação </h2>
+ 1. Faça o clone do repositório usando o comando git clone "link do repositório".
+ 2. Entre na pasta que acabou de criar.
+ 3. Faça a instalação das dependências com o comando npm install.
+ 4. Faça a configuração das variáveis de ambiente no arquivo .env.
+ 5. Caso utilize BD mysql, poderá usar o modelo na pasta ./utils/StoreManager.sql. Copie o conteúdo deste arquivo e execute no workbench para gerar o Banco de dados.
+ 6. Inicie a aplicação em uma porta local, previamente configurada no passo 4, com o comando node index.js.
+ 7. Faça as requisições utilizando seu client preferido. Na seção Usabilidade, sugiro alguns.
 
 <h2 id="tecnologias">Tecnologias</h2>
 
